@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +24,8 @@ Route::resources([
 
 Route::resources([
     'actors' => ActorController::class,
+]);
+
+Route::resources([
+    'movies' => MovieController::class,
 ]);
