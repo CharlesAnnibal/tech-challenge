@@ -2,13 +2,8 @@
 
 namespace Tests\Feature;
 
-
-use Illuminate\Foundation\Testing\WithFaker;
-use phpDocumentor\Reflection\Types\Void_;
 use Tests\Feature\ApiTestCase;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class ActorsApiTest extends ApiTestCase
 {
@@ -16,11 +11,12 @@ class ActorsApiTest extends ApiTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        print_r("ACTORS API TEST CASE");
         DB::table('actors')->insert([
             'name' => "Charles Santoss",
             'bio' => 'Nascido no Rio de janeiro',
             'born_at' => '1991-05-28',
+            "created_at" => '2020-11-09T16:14:39.000000Z',
+            "updated_at" => '2020-11-09T16:14:39.000000Z',
         ]);
     }
 
@@ -58,12 +54,13 @@ class ActorsApiTest extends ApiTestCase
             ->assertStatus(200)
             ->assertJson([
                 'data' => [
-                    'id' => 1,
                     'name' => 'Charles Santoss',
                     'bio' => 'Nascido no Rio de janeiro',
                     'born_at' => '1991-05-28',
-                    "created_at" => '',
-                    "updated_at" => ''
+                    "created_at" => '2020-11-09T16:14:39.000000Z',
+                    "updated_at" => '2020-11-09T16:14:39.000000Z',
+                    "filmography" => [],
+                    "starred_as" => []
                 ]
             ]);
     }
@@ -93,8 +90,7 @@ class ActorsApiTest extends ApiTestCase
                     'bio',
                     'born_at',
                     'updated_at',
-                    'created_at',
-                    'id'
+                    'created_at'
                 ],
             ]);
     }
@@ -125,8 +121,7 @@ class ActorsApiTest extends ApiTestCase
                     'bio',
                     'born_at',
                     'updated_at',
-                    'created_at',
-                    'id'
+                    'created_at'
                 ],
             ]);
     }

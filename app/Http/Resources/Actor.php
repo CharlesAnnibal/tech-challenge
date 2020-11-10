@@ -14,6 +14,15 @@ class Actor extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'bio' => $this->bio,
+            'born_at' => $this->born_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'filmography' => $this->filmography,
+            'starred_as' => MovieRole::collection($this->roles)
+        ];
     }
 }

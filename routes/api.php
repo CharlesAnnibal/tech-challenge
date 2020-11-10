@@ -29,3 +29,7 @@ Route::resources([
 Route::resources([
     'movies' => MovieController::class,
 ]);
+
+Route::resources([
+    'movie/roles' => MovieRoleController::class,
+]);

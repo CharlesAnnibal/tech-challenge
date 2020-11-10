@@ -16,4 +16,12 @@ class Genre extends Model
     protected $keyType = 'string';
 
     protected $fillable = ['name'];
+
+    /**
+     * The movies that belongs to this genre.
+     */
+    public function movies()
+    {
+        return $this->hasMany('App\Models\Movie');
+    }
 }

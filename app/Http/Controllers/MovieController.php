@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use App\Http\Requests\MovieRequest;
 use App\Models\Movie;
 use App\Repositories\Movie\MovieCRUDRepository;
@@ -20,7 +19,7 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $movie = new MovieCRUDRepository(["request" => $request, "movie" => null]);
-        return new ResourceCollection($movie->read());
+        return new \App\Http\Resources\MovieCollection($movie->read());
     }
 
 
@@ -33,8 +32,7 @@ class MovieController extends Controller
     public function store(MovieRequest $request)
     {
         $movie = new MovieCRUDRepository(["request" => $request]);
-        $teste = $movie->create();
-        return new \App\Http\Resources\Movie($teste);
+        return new \App\Http\Resources\Movie($movie->create());
     }
 
     /**
@@ -66,13 +64,13 @@ class MovieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Movie  $movie
+     * @param  Movie  $movieFromRequest
      * @return \Illuminate\Http\Response
      */
     public function destroy(Movie $movie)
     {
-        $movie = new MovieCRUDRepository(["request" => null, "movie" => $movie]);
-        $deletedMovie = $movie->delete();
+        $movieOperations = new MovieCRUDRepository(["request" => null, "movie" => $movie]);
+        $deletedMovie = $movieOperations->delete();
         return new Response(["message" => "Movie " . $deletedMovie->name . " was deleted successfully"], 200);
     }
 }

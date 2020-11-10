@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\HasFetchAllRenderCapabilities;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use App\Http\Requests\ActorRequest;
 use App\Models\Actor;
 use App\Repositories\Actor\ActorCRUDRepository;
@@ -21,7 +20,7 @@ class ActorController extends Controller
     public function index(Request $request)
     {
         $actor = new ActorCRUDRepository(["request" => $request, "actor" => null]);
-        return new ResourceCollection($actor->read());
+        return new \App\Http\Resources\ActorCollection($actor->read());
     }
 
     /**
