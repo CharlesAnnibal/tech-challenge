@@ -22,7 +22,8 @@ class Actor extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'filmography' => $this->filmography,
-            'starred_as' => MovieRole::collection($this->roles)
+            'starred_as' => MovieRole::collection($this->roles),
+            'favorite_genre' => $this->favorite_genre
         ];
     }
 }

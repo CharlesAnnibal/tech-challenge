@@ -43,7 +43,8 @@ class ActorController extends Controller
      */
     public function show(Actor $actor)
     {
-        return new \App\Http\Resources\Actor($actor);
+        $actorWithFavoriteGenre = ActorCRUDRepository::addFavoriteGenre($actor);
+        return new \App\Http\Resources\Actor($actorWithFavoriteGenre);
     }
 
 
